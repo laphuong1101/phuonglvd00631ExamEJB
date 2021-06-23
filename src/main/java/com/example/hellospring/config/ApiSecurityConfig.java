@@ -16,7 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @Order(1)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String PROTECTED_URLS = "/api/v1/*/";
+    private static final String PROTECTED_URLS = "/api/v1/accounts/*";
 
     @Bean(name = "bCryptPasswordEncoder")
     public BCryptPasswordEncoder passwordEncoder() {
