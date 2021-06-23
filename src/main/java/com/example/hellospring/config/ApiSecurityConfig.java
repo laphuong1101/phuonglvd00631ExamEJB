@@ -14,7 +14,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String PROTECTED_URLS = "/api/v1/*/";
 
@@ -38,7 +37,10 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(authenticationFilter(), AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/api/v1/accounts").permitAll()
-                .antMatchers("/api/v1/accounts/login").permitAll();
+                .antMatchers("/api/v1/accounts/login").permitAll()
+                .antMatchers("/api/v1/products/find-all").hasAnyRole("ADMIN" )
+                .anyRequest().authenticated();
+
     }
 
     @Bean

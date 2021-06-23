@@ -1,5 +1,6 @@
 package com.example.hellospring.controller;
 
+import com.example.hellospring.entity.AccLogin;
 import com.example.hellospring.entity.Account;
 import com.example.hellospring.entity.Credential;
 import com.example.hellospring.model.dto.AccountDTO;
@@ -19,9 +20,8 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public String login (@RequestParam String username,
-                         @RequestParam String password) {
-        Credential credential = accountService.login(username, password);
+    public String login (@RequestBody AccLogin accLogin) {
+        Credential credential = accountService.login(accLogin);
         return credential.getTokenKey();
     }
 
