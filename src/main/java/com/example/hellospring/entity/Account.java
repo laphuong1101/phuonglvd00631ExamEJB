@@ -42,6 +42,6 @@ public class Account {
     }
 
     public String getRole() {
-        return role == 2 ? "ADMIN" : "USER";
+        return role == 1 ? "ADMIN" : "USER";
     }
 }

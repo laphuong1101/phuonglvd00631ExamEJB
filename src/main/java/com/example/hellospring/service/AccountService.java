@@ -1,5 +1,6 @@
 package com.example.hellospring.service;
 
+import com.example.hellospring.entity.AccLogin;
 import com.example.hellospring.entity.Account;
 import com.example.hellospring.entity.Credential;
 import com.example.hellospring.model.dto.AccountDTO;
@@ -43,11 +44,11 @@ public class AccountService {
     }
 
     // login
-    public Credential login(String username, String password) {
-        Optional<Account> userOptional = accountRepository.findByUserName(username);
+    public Credential login(AccLogin accLogin) {
+        Optional<Account> userOptional = accountRepository.findByUserName(accLogin.getUsername());
         if (userOptional.isPresent()) {
             Account account = userOptional.get();
-            if (bCryptPasswordEncoder.matches(password, account.getPassword())) {
+            if (bCryptPasswordEncoder.matches(accLogin.getPassword(), account.getPassword())) {
                 Credential credential = new Credential(account);
                 return credentialRepository.save(credential);
             }

@@ -3,7 +3,6 @@ package com.example.hellospring.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,9 +13,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String PROTECTED_URLS = "/api/v1/accounts/*";
+    private static final String PROTECTED_URLS = "/api/**";
 
     @Bean(name = "bCryptPasswordEncoder")
     public BCryptPasswordEncoder passwordEncoder() {
@@ -38,7 +36,10 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(authenticationFilter(), AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/api/v1/accounts").permitAll()
-                .antMatchers("/api/v1/accounts/login").permitAll();
+                .antMatchers("/api/v1/accounts/login").permitAll()
+                .antMatchers("/api/v1/products/find-all").hasAnyRole("ADMIN" )
+                .anyRequest().authenticated();
+
     }
 
     @Bean
