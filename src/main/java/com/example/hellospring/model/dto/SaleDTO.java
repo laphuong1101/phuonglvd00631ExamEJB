@@ -9,7 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDTO {
-    private String userName;
-    private String password;
+public class SaleDTO {
+    private int SalesManID;
+    private String SalesManName;
+    private String DOS;
+    private int ProdID;
 }

@@ -24,6 +24,7 @@ public class ProductController {
         return productService.findAll();
     }
 
+
     @GetMapping("/seeding")
     public String seeding (){
         return productService.seeding();

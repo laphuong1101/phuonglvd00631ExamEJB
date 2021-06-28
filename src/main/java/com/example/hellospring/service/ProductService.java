@@ -3,7 +3,6 @@ package com.example.hellospring.service;
 import com.example.hellospring.entity.Product;
 import com.example.hellospring.model.dto.ProductDTO;
 import com.example.hellospring.model.mapper.ProductMapper;
-import com.example.hellospring.repository.AccountRepository;
 import com.example.hellospring.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +12,9 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    @Autowired
-    private AccountRepository accountRepository;
 
     @Autowired
     private ProductRepository productRepository;
-
-
 
     // save
     public ProductDTO save (Product product) {
@@ -41,20 +36,20 @@ public class ProductService {
 
     // seeding hard code
     public String seeding() {
-        Product iphone = new Product(1,"iphone", 1000);
-        Product samsung = new Product(2,"samsung", 9000);
-        Product oppo = new Product(3,"oppo", 500);
-        Product vsmart = new Product(4,"vsmart", 300);
-        Product bphone = new Product(5,"bphone", 350);
-
         List<Product> products = new ArrayList<>();
-        products.add(iphone);
-        products.add(samsung);
-        products.add(oppo);
-        products.add(vsmart);
-        products.add(bphone);
+        products.add(new Product(1,"iphone 11", "apple", "28/06/2021", 1000));
+        products.add(new Product(2,"iphone 12", "apple", "28/06/2021", 1200));
+        products.add(new Product(3,"iphone 12 pro max", "apple", "28/06/2021", 1500));
+        products.add(new Product(4,"iphone 12 pro mini", "apple", "28/06/2021", 1300));
+        products.add(new Product(5,"iphone 11 pro max", "apple", "28/06/2021", 1100));
+        products.add(new Product(5,"samsung", "samsung", "28/06/2021", 1000));
+        products.add(new Product(5,"oppo", "china", "28/06/2021", 800));
+        products.add(new Product(5,"pixel 3", "google", "28/06/2021", 900));
+        products.add(new Product(5,"vsmart", "vin group", "28/06/2021", 500));
+        products.add(new Product(5,"nokia", "nokia", "28/06/2021", 110));
 
         productRepository.saveAll(products);
+
         return "OK";
     }
 
